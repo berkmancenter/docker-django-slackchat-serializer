@@ -1,0 +1,6 @@
+.slack_liveblog_dev_env
+*.pyc
+__pycache*
+.env
+mediafiles
+*sqlite3
