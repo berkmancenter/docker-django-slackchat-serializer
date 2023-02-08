@@ -7,10 +7,4 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'slack_liveblog.settings')
 
 app = Celery('slackchat')
 app.config_from_object('django.conf:settings', namespace='CELERY')
-app.conf.update(
-  task_serializer='json'
-)
-# Use synchronous tasks in local dev
-if settings.DEBUG:
-  app.conf.update(task_always_eager=True)
-app.autodiscover_tasks(lambda: settings.INSTALLED_APPS, related_name='celery')
+app.autodiscover_tasks()

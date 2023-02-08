@@ -2,14 +2,17 @@ version: '3'
 
 services:
   postgres:
-    image: 'postgres:15.1'
+    image: postgres:15.1
     volumes:
-      - 'postgres:/var/lib/postgresql/data'
-      - '.:/app'
+      - postgres:/var/lib/postgresql/data
+      - .:/app
     environment:
       - POSTGRES_DB=slack_liveblog_dev
       - POSTGRES_USER=slack_liveblog_dev
       - POSTGRES_PASSWORD=123456
+
+  redis:
+    image: redis:7.0
 
   slack_liveblog:
     build:
@@ -18,12 +21,15 @@ services:
         - ENV_DIR=${ENV_DIR}
         - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
     depends_on:
-      - 'postgres'
+      - postgres
+      - redis
     volumes:
-      - '.:/app'
+      - .:/app
       - docker_website_bash_history:/home/slack_liveblog/hist
     env_file:
     - .env
+    environment:
+      HISTFILE: /home/slack_liveblog/hist/.bash_history
     ports:
       - 4949:8000
 

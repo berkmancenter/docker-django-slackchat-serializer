@@ -47,7 +47,6 @@ SLACKCHAT_PUBLISH_ROOT = os.getenv('SLACKCHAT_PUBLISH_ROOT')
 SLACKCHAT_TEAM_ROOT = os.getenv('SLACKCHAT_TEAM_ROOT')
 SLACKCHAT_DEFAULT_OWNER = os.getenv('SLACKCHAT_DEFAULT_OWNER')
 
-
 MIDDLEWARE = [
   'django.middleware.security.SecurityMiddleware',
   'django.contrib.sessions.middleware.SessionMiddleware',
@@ -135,7 +134,7 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if DEBUG
+if DEBUG:
   LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -151,3 +150,7 @@ if DEBUG
       },
     },
   }
+
+# Celery configuration
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://redis:6379/0')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://redis:6379/0')

@@ -1,0 +1,4 @@
+ps auxww | awk '/celery worker/ {print $2}' | xargs kill -9
+cd /app/src
+celery -A slack_liveblog worker -l INFO &
+p manage.py runserver 0.0.0.0:8000
