@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.11
 
 ARG ENV_DIR
 ARG NGROK_AUTHTOKEN
