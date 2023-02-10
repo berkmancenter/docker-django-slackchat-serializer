@@ -39,6 +39,8 @@ INSTALLED_APPS = [
   'rest_framework',
   'foreignform',
   'slackchat',
+  'rest_framework.authtoken',
+  'slack_liveblog.apps.SlackLiveblogConfig'
 ]
 
 SLACKCHAT_SLACK_VERIFICATION_TOKEN = os.getenv('SLACK_VERIFICATION_TOKEN')
